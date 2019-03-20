@@ -1,40 +1,40 @@
-package rmq.test
+package sqrt
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import rmq.SegmentTree
 
-class SegmentTreeSumTest {
+class SqrtDecompositionTest {
 
     lateinit private var originalArray: Array<Long>
-    lateinit private var rmq: SegmentTree<Long>
+    lateinit private var sqrt: SqrtDecomposition
     private val N = 100000
     private val U = 100000
     private val MAX = 1000000L
 
     @BeforeEach
-    fun `create Segment Tree with random values`(){
+    fun `create Sqrt Decomposition with random values`(){
         originalArray = TestUtils.buildRandomArray(N, MAX)
-        rmq = SegmentTree<Long>(originalArray) { a, b -> a + b }
+        sqrt = SqrtDecomposition(originalArray)
     }
 
     @Test
-    fun `query(I, J) should return the sum of elements from I to J`(){
+    fun `query(I, J) should return the sum of elements from I until J`(){
         var (I, J) = TestUtils.sortedRandomPair(N)
         var sum = 0L
-        for(i in I..J){
+        for(i in I until J){
             sum += originalArray[i]
         }
 
-        Assertions.assertEquals(sum, rmq.query(I, J)) {
+        Assertions.assertEquals(sum, sqrt.query(I, J)) {
             "query($I, $J) failed"
         }
     }
 
     @Test
     fun query_stress_test(){
-        (0..10_000).map {`query(I, J) should return the sum of elements from I to J`()}
+        (0..10_000).map {`query(I, J) should return the sum of elements from I until J`()}
     }
 
     @Test
@@ -43,25 +43,13 @@ class SegmentTreeSumTest {
             val pos = (Math.random() * N).toInt()
             val value = ((Math.random() - 0.5) * MAX).toLong()
             originalArray[pos] = value
-            rmq[pos] = value
+            sqrt[pos] = value
         }
 
         query_stress_test()
     }
 
-    @Test
-    fun `changing elements values using #efficientAction + #set should not change other behaviour`() {
-        rmq.efficientAction {
-            for (i in 1..U) {
-                val pos = (Math.random() * N).toInt()
-                val value = ((Math.random() - 0.5) * MAX).toLong()
-                originalArray[pos] = value
-                rmq[pos] = value
-            }
-        }
 
-        query_stress_test()
-    }
 
 
 }

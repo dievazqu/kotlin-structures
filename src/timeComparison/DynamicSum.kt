@@ -3,8 +3,9 @@ package timeComparison
 import TestUtils
 import fenwickTree.FenwickTree
 import rmq.SegmentTree
+import sqrt.SqrtDecomposition
 
-class FenwickTreeVsSegmentTree(){
+class DynamicSum(){
 
     data class Query(val i:Int, val j:Int)
     data class Update(val i:Int, val v:Long)
@@ -36,15 +37,24 @@ class FenwickTreeVsSegmentTree(){
             updates.forEach { segment[it.i] = it.v }
         }
 
+        val sqrtTime = TestUtils.time {
+            val sqrt = SqrtDecomposition(values)
+            queries.forEach { sqrt.query(it.i, it.j) }
+            updates.forEach { sqrt[it.i] = it.v }
+        }
+
 
         println("FenwickTree: $fenwickTime")
         println("SegmentTree: $segmentTime")
+        println("SqrtDecomposition: $sqrtTime")
     }
 }
 
 fun main(args: Array<String>) {
-    val comp = FenwickTreeVsSegmentTree()
+    val comp = DynamicSum()
     comp.compare(1_000_000, 100_000_000L, 1_000_000, 1_000_000)
+    println()
+    comp.compare(1_000_000, 100_000_000L, 100_000, 10_000_000)
 }
 
 

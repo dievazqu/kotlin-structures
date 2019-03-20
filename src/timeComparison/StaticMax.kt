@@ -4,7 +4,7 @@ import TestUtils
 import rmq.SegmentTree
 import rmq.SparseTable
 
-class SparseTableSegmentTreeTimeComparison(){
+class StaticMax(){
 
     data class Query(val i:Int, val j:Int)
 
@@ -34,7 +34,7 @@ class SparseTableSegmentTreeTimeComparison(){
 }
 
 fun main(args: Array<String>) {
-    val comp = SparseTableSegmentTreeTimeComparison()
+    val comp = StaticMax()
     comp.compare(1_000_000, 100_000_000L, 1_000_000)
     println()
     comp.compare(100_000, 100_000_000L, 10_000_000)

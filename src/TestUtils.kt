@@ -5,7 +5,6 @@ class TestUtils{
     companion object {
 
         fun sortedRandomPair(n:Int, distinct: Boolean=false): Result {
-
             var I = (Math.random() * n).toInt()
             var J = (Math.random() * n).toInt()
             if (J<I){
@@ -24,11 +23,7 @@ class TestUtils{
         }
 
         fun buildRandomArray(n:Int, max:Long): Array<Long>{
-            val arr = LongArray(n)
-            for(i in 0 until n){
-                arr[i] = ((Math.random() - 0.5) * max).toLong()
-            }
-            return arr.toTypedArray()
+            return (1..n).map { ((Math.random() - 0.5) * max).toLong() }.toTypedArray()
         }
 
         fun buildRandomMatrix(n: Int, m:Int, max:Long): Array<Array<Long>>{
