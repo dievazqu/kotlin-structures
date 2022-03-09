@@ -3,6 +3,7 @@ package fenwickTree
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import utils.TestUtils
 
 class FenwickTree2Test {
 

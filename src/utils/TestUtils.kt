@@ -1,8 +1,14 @@
+package utils
+
 class TestUtils{
 
     data class Result(val a:Int, val b:Int)
 
     companion object {
+
+        fun getRandomNum(min: Long, max: Long): Long {
+            return Math.random().toLong() * (max - min) + min
+        }
 
         fun sortedRandomPair(n:Int, distinct: Boolean=false): Result {
             var I = (Math.random() * n).toInt()

@@ -37,7 +37,7 @@ class SegmentTree<T>(M:Int, val op:(T, T)->T) {
     fun remove(idx: Int) {
         val idx = idx(idx)
         data[idx] =  null
-        if(refresh) refresh(idx)
+        if(refresh) refreshFromIndex(idx)
     }
 
     operator fun get(idx: Int): T? {
@@ -47,10 +47,10 @@ class SegmentTree<T>(M:Int, val op:(T, T)->T) {
     operator fun set(idx: Int, elem: T){
         val idx = idx(idx)
         data[idx] = elem
-        if (refresh) refresh(idx)
+        if (refresh) refreshFromIndex(idx)
     }
 
-    private fun refresh(idx: Int) {
+    private fun refreshFromIndex(idx: Int) {
         var i = idx
         while (i != 0) {
             i = (i - 1) / 2
@@ -69,11 +69,13 @@ class SegmentTree<T>(M:Int, val op:(T, T)->T) {
         if (left > right || left < 0 || right >= data.size)
             throw IllegalArgumentException()
         val ans = queryRec(0, 0, maxCap - 1, left, right)
-        if (ans==null) throw IllegalStateException("SegmentTree is empty")
-        return ans
+        return ans ?: throw IllegalStateException("SegmentTree is empty")
     }
 
+    var count = 0
+
     private fun queryRec(idx: Int, li: Int, ri: Int, lo: Int, ro: Int): T? {
+        count++
         if (lo <= li && ri <= ro)
             return data[idx]
         if (ri < lo || li > ro)

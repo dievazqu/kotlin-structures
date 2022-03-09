@@ -1,6 +1,6 @@
 package timeComparison
 
-import TestUtils
+import utils.TestUtils
 import rmq.SegmentTree
 import rmq.SparseTable
 

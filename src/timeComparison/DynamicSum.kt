@@ -1,6 +1,6 @@
 package timeComparison
 
-import TestUtils
+import utils.TestUtils
 import fenwickTree.FenwickTree
 import rmq.SegmentTree
 import sqrt.SqrtDecomposition
