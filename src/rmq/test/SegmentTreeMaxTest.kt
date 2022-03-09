@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import rmq.SegmentTree
+import utils.TestUtils
 
 class SegmentTreeMaxTest {
 
@@ -21,7 +22,7 @@ class SegmentTreeMaxTest {
 
     @Test
     fun `query(I, J) should return the maximum of elements from I to J`(){
-        var (I, J) = TestUtils.getRandomSortedPair(N)
+        var (I, J) = TestUtils.getRandomRange(0, N)
         var max = Long.MIN_VALUE
         for(i in I..J){
             max = Math.max(max, originalArray[i])

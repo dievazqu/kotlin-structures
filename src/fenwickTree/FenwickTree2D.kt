@@ -1,6 +1,6 @@
 package fenwickTree
 
-class FenwickTree2(val N: Int, val M: Int) {
+class FenwickTree2D(val N: Int, val M: Int) {
 
     constructor(currentArray: Array<Array<Long>>) : this(currentArray.size, currentArray[0].size) {
         for(i in currentArray.indices){

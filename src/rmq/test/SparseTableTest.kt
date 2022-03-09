@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import rmq.SparseTable
+import utils.TestUtils
 
 class SparseTableTest {
 
@@ -20,8 +21,7 @@ class SparseTableTest {
 
     @Test
     fun `query(I, J) should return the maximum of elements from I until J`(){
-        // TODO: FIX (a, a) pairs
-        var (I, J) = TestUtils.getRandomSortedPair(N-1)
+        var (I, J) = TestUtils.getRandomRange(0, N)
         var max = Long.MIN_VALUE
         for(i in I until J){
             max = Math.max(max, originalArray[i])

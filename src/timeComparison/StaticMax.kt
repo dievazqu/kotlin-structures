@@ -1,6 +1,6 @@
 package timeComparison
 
-import TestUtils
+import utils.TestUtils
 import rmq.SegmentTree
 import rmq.SparseTable
 
@@ -11,8 +11,7 @@ class StaticMax(){
     fun compare(n:Int, max:Long, q:Int){
         val values = TestUtils.getRandomArray(n, max)
         val queries = (1..q).map {
-            // TODO: FIX (a, a) pairs
-            val (i, j) = TestUtils.getRandomSortedPair(n)
+            val (i, j) = TestUtils.getRandomRange(0, n)
             Query(i, j)
         }
         compare(values, queries)

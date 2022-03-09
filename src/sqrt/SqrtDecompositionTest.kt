@@ -3,6 +3,7 @@ package sqrt
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import utils.TestUtils
 
 class SqrtDecompositionTest {
 
@@ -20,7 +21,7 @@ class SqrtDecompositionTest {
 
     @Test
     fun `query(I, J) should return the sum of elements from I until J`(){
-        var (I, J) = TestUtils.getRandomSortedPair(N)
+        var (I, J) = TestUtils.getRandomRange(0, N)
         var sum = 0L
         for(i in I until J){
             sum += originalArray[i]

@@ -1,6 +1,6 @@
 package timeComparison
 
-import TestUtils
+import utils.TestUtils
 import fenwickTree.FenwickTree
 import rmq.SegmentTree
 import sqrt.SqrtDecomposition
@@ -13,8 +13,7 @@ class DynamicSum(){
     fun compare(n:Int, max:Long, q:Int, u:Int){
         val values = TestUtils.getRandomArray(n, max)
         val queries = (1..q).map {
-            // TODO: FIX (a, a) pairs
-            val (i, j) = TestUtils.getRandomSortedPair(n)
+            val (i, j) = TestUtils.getRandomRange(0, n)
             Query(i, j)
         }
         val updates = (1..u).map {
