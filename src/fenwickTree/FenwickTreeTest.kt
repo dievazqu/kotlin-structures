@@ -1,77 +1,68 @@
 package fenwickTree
 
+import utils.TestUtils.Companion.getRandomArray
+import utils.TestUtils.Companion.getRandomNumber
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import utils.TestUtils
+import utils.TestUtils.Companion.getRandomRange
 
 class FenwickTreeTest {
 
     lateinit private var originalArray: Array<Long>
     lateinit private var fenwickTree: FenwickTree
-    private val U = 100000
-    private val N = 100000
-    private val MAX = 1000000L
+    private val N = 10e6.toInt()
+    private val MAX = 10e18.toLong()
+    private val timesTested = 10e3.toInt()
 
     @BeforeEach
     fun `create Fenwick tree with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = getRandomArray(N, MAX)
         fenwickTree = FenwickTree(originalArray)
     }
 
     @Test
     fun `get(I) should return the I-th elem`(){
-        val I = (Math.random() * N).toInt()
+        val I = getRandomNumber(0, N)
 
         Assertions.assertEquals(originalArray[I], fenwickTree[I])
     }
 
     @Test
-    fun `query(I, J) should return the sum of elements from I until J`(){
-        var (I, J) = TestUtils.sortedRandomPair(N)
+    fun queryCheck() {
+        val (l, r) = getRandomRange(0, N, 10000)
 
-        var sum = 0L
-        for(i in I until J){
-            sum += originalArray[i]
+        var expectedSum = 0L
+        for(i in l until r){
+            expectedSum += originalArray[i]
         }
 
-        Assertions.assertEquals(sum, fenwickTree.query(I, J)) {
+        Assertions.assertEquals(expectedSum, fenwickTree.query(l, r)) {
+            "query($l, $r) failed"
+        }
+    }
+
+    fun setAndQueryCheck() {
+        var (I, J) = getRandomRange(0, N);
+        var pos = getRandomNumber(I, J)
+        val diff = getRandomNumber(-MAX, MAX)
+
+        var queryBefore = fenwickTree.query(I, J)
+        fenwickTree[pos] += diff
+        var queryAfter = fenwickTree.query(I, J)
+
+        Assertions.assertEquals(queryBefore + diff, queryAfter) {
             "query($I, $J) failed"
         }
     }
 
     @Test
-    fun query_stress_test(){
-        (0..10_000).map{ `query(I, J) should return the sum of elements from I until J`() }
+    fun `query results must be consistent for random ranges`(){
+        (0..timesTested).map{ queryCheck() }
     }
 
     @Test
-    fun `changing elements values using #set should not change other behaviour`() {
-        for(i in 1..U){
-            val pos = (Math.random() * N).toInt()
-            val value = ((Math.random() - 0.5) * MAX).toLong()
-            originalArray[pos] = value
-            fenwickTree[pos] = value
-        }
-
-        `get(I) should return the I-th elem`()
-        query_stress_test()
+    fun `changing elements values using #set should change query results`() {
+        (0..timesTested).map{ setAndQueryCheck() }
     }
-
-    @Test
-    fun `changing elements values using #update should not change other behaviours`() {
-        for(i in 1..U){
-            val pos = (Math.random() * N).toInt()
-            val diff = ((Math.random() - 0.5) * MAX).toLong()
-            originalArray[pos] += diff
-            fenwickTree.update(pos, diff)
-        }
-
-        `get(I) should return the I-th elem`()
-        query_stress_test()
-    }
-
-
-
-
 }

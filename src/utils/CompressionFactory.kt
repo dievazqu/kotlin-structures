@@ -1,7 +1,7 @@
 package utils
 
 /**
- * Utility service to map Long into Into conserving the order.
+ * Utility service to map Long into Int conserving the order.
  */
 class CompressionFactory {
 

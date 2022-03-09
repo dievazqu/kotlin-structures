@@ -15,13 +15,13 @@ class SqrtDecompositionTest {
 
     @BeforeEach
     fun `create Sqrt Decomposition with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
         sqrt = SqrtDecomposition(originalArray)
     }
 
     @Test
     fun `query(I, J) should return the sum of elements from I until J`(){
-        var (I, J) = TestUtils.sortedRandomPair(N)
+        var (I, J) = TestUtils.getRandomRange(0, N)
         var sum = 0L
         for(i in I until J){
             sum += originalArray[i]

@@ -11,9 +11,9 @@ class DynamicSum(){
     data class Update(val i:Int, val v:Long)
 
     fun compare(n:Int, max:Long, q:Int, u:Int){
-        val values = TestUtils.buildRandomArray(n, max)
+        val values = TestUtils.getRandomArray(n, max)
         val queries = (1..q).map {
-            val (i, j) = TestUtils.sortedRandomPair(n, true)
+            val (i, j) = TestUtils.getRandomRange(0, n)
             Query(i, j)
         }
         val updates = (1..u).map {

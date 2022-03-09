@@ -9,9 +9,9 @@ class StaticMax(){
     data class Query(val i:Int, val j:Int)
 
     fun compare(n:Int, max:Long, q:Int){
-        val values = TestUtils.buildRandomArray(n, max)
+        val values = TestUtils.getRandomArray(n, max)
         val queries = (1..q).map {
-            val (i, j) = TestUtils.sortedRandomPair(n, true)
+            val (i, j) = TestUtils.getRandomRange(0, n)
             Query(i, j)
         }
         compare(values, queries)

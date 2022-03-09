@@ -15,13 +15,13 @@ class SparseTableTest {
 
     @BeforeEach
     fun `create Sparse Table with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
         sparse = SparseTable<Long>(originalArray) { a, b -> Math.max(a,b)}
     }
 
     @Test
     fun `query(I, J) should return the maximum of elements from I until J`(){
-        var (I, J) = TestUtils.sortedRandomPair(N-1, true)
+        var (I, J) = TestUtils.getRandomRange(0, N)
         var max = Long.MIN_VALUE
         for(i in I until J){
             max = Math.max(max, originalArray[i])

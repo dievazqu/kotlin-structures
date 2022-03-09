@@ -13,7 +13,7 @@ class CompressionTest {
 
     @BeforeEach
     fun `create array with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
     }
 
     @Test
@@ -60,7 +60,7 @@ class CompressionTest {
 
     @Test
     fun `It handles 10^6 elements in less than a couple of seconds`() {
-        var array = TestUtils.buildRandomArray(1000000, MAX)
+        var array = TestUtils.getRandomArray(1000000, MAX)
         var time = TestUtils.time {
             CompressionFactory.returnCompressedValues(array)
         }

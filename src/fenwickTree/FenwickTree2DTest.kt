@@ -5,10 +5,10 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import utils.TestUtils
 
-class FenwickTree2Test {
+class FenwickTree2DTest {
 
     lateinit private var originalMatrix: Array<Array<Long>>
-    lateinit private var fenwickTree: FenwickTree2
+    lateinit private var fenwickTree: FenwickTree2D
     private val N = 995
     private val M = 1005
     private val U = 100000
@@ -16,8 +16,8 @@ class FenwickTree2Test {
 
     @BeforeEach
     fun `create Fenwick tree with random values`(){
-        originalMatrix = TestUtils.buildRandomMatrix(N, M, MAX)
-        fenwickTree = FenwickTree2(originalMatrix)
+        originalMatrix = TestUtils.getRandomMatrix(N, M, MAX)
+        fenwickTree = FenwickTree2D(originalMatrix)
     }
 
     @Test
@@ -30,8 +30,8 @@ class FenwickTree2Test {
 
     @Test
     fun `query(I0, J0, I1, J1) should return the sum of the elements from (I0,J0) to (I1-1, J1-1)`(){
-        var (I0, I1) = TestUtils.sortedRandomPair(N)
-        var (J0, J1) = TestUtils.sortedRandomPair(M)
+        var (I0, I1) = TestUtils.getRandomRange(0, N)
+        var (J0, J1) = TestUtils.getRandomRange(0, M)
 
         var sum = 0L
         for(i in I0 until I1){
