@@ -14,7 +14,7 @@ class SegmentTreeTimeTest {
 
     @BeforeEach
     fun `create Segment Tree with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
         rmq = SegmentTree<Long>(originalArray) { a, b -> a + b }
     }
 

@@ -1,5 +1,12 @@
 package fenwickTree
 
+/**
+ * Fenwick Tree implementation that supports:
+ * * Updating in O(ln(n))
+ * * Querying the sum in any range in O(ln(n))
+ *
+ * Spacial Complexity: O(n)
+ */
 class FenwickTree(val N: Int) {
 
     constructor(currentArray: Array<Long>) : this(currentArray.size) {
@@ -11,6 +18,7 @@ class FenwickTree(val N: Int) {
     private var acumValues: LongArray = LongArray(N + 1)
     private var values: LongArray = LongArray(N + 1)
 
+    // O(1)
     operator fun get(n: Int): Long {
         return values[n + 1]
     }
@@ -41,7 +49,7 @@ class FenwickTree(val N: Int) {
         update(n, diff)
     }
 
-    fun update(n: Int, value: Long) {
+    private fun update(n: Int, value: Long) {
         var n = n + 1
         values[n] += value
         while (n <= acumValues.size) {

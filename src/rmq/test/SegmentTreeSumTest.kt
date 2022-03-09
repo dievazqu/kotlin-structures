@@ -15,13 +15,13 @@ class SegmentTreeSumTest {
 
     @BeforeEach
     fun `create Segment Tree with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
         rmq = SegmentTree<Long>(originalArray) { a, b -> a + b }
     }
 
     @Test
     fun `query(I, J) should return the sum of elements from I to J`(){
-        var (I, J) = TestUtils.sortedRandomPair(N)
+        var (I, J) = TestUtils.getRandomSortedPair(N)
         var sum = 0L
         for(i in I..J){
             sum += originalArray[i]

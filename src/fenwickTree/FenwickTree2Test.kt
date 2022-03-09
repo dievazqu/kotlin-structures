@@ -15,7 +15,7 @@ class FenwickTree2Test {
 
     @BeforeEach
     fun `create Fenwick tree with random values`(){
-        originalMatrix = TestUtils.buildRandomMatrix(N, M, MAX)
+        originalMatrix = TestUtils.getRandomMatrix(N, M, MAX)
         fenwickTree = FenwickTree2(originalMatrix)
     }
 
@@ -29,8 +29,8 @@ class FenwickTree2Test {
 
     @Test
     fun `query(I0, J0, I1, J1) should return the sum of the elements from (I0,J0) to (I1-1, J1-1)`(){
-        var (I0, I1) = TestUtils.sortedRandomPair(N)
-        var (J0, J1) = TestUtils.sortedRandomPair(M)
+        var (I0, I1) = TestUtils.getRandomSortedPair(N)
+        var (J0, J1) = TestUtils.getRandomSortedPair(M)
 
         var sum = 0L
         for(i in I0 until I1){

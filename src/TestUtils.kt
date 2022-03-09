@@ -4,30 +4,33 @@ class TestUtils{
 
     companion object {
 
-        fun sortedRandomPair(n:Int, distinct: Boolean=false): Result {
-            var I = (Math.random() * n).toInt()
-            var J = (Math.random() * n).toInt()
-            if (J<I){
-                val aux = I
-                I = J
-                J = aux
-            }
-            if (distinct){
-                if (I==0){
-                    J+=1
-                }else{
-                    I-=1
-                }
-            }
-            return Result(I, J)
+        fun getRandomNumber(min: Int, max: Int): Int {
+            return getRandomNumber(min.toLong(), max.toLong()).toInt()
         }
 
-        fun buildRandomArray(n:Int, max:Long): Array<Long>{
+        fun getRandomNumber(min: Long, max: Long): Long {
+            if (max < min) {
+                throw IllegalArgumentException("max cant be lower than min")
+            }
+            return (Math.random() * (max - min)).toLong() + min
+        }
+
+        fun getRandomSortedPair(n:Int): Result {
+            var I = getRandomNumber(0, n)
+            var J = getRandomNumber(0, n)
+            if (J<I){
+                return Result(J, I)
+            } else {
+                return Result(I, J)
+            }
+        }
+
+        fun getRandomArray(n:Int, max:Long): Array<Long>{
             return (1..n).map { ((Math.random() - 0.5) * max).toLong() }.toTypedArray()
         }
 
-        fun buildRandomMatrix(n: Int, m:Int, max:Long): Array<Array<Long>>{
-            return (1..n).map { buildRandomArray(m, max) }.toTypedArray()
+        fun getRandomMatrix(n: Int, m:Int, max:Long): Array<Array<Long>>{
+            return (1..n).map { getRandomArray(m, max) }.toTypedArray()
         }
 
         fun time(action: ()->Unit):Long {

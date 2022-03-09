@@ -15,13 +15,13 @@ class SegmentTreeMaxTest {
 
     @BeforeEach
     fun `create Segment Tree with random values`(){
-        originalArray = TestUtils.buildRandomArray(N, MAX)
+        originalArray = TestUtils.getRandomArray(N, MAX)
         rmq = SegmentTree<Long>(originalArray) { a, b -> Math.max(a,b) }
     }
 
     @Test
     fun `query(I, J) should return the maximum of elements from I to J`(){
-        var (I, J) = TestUtils.sortedRandomPair(N)
+        var (I, J) = TestUtils.getRandomSortedPair(N)
         var max = Long.MIN_VALUE
         for(i in I..J){
             max = Math.max(max, originalArray[i])
