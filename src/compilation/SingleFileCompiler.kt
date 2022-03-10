@@ -63,6 +63,9 @@ fun detectImports(file: File): List<String> {
     val inputStream: InputStream = file.inputStream()
     inputStream.bufferedReader().forEachLine { line ->
         if (line.startsWith("import")) {
+            if(line.endsWith("compiler-ignore-line")) {
+                println("Ignoring line:' ${line}'")
+            }
             result.add(line.split(" ")[1])
         }
     }

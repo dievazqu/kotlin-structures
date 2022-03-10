@@ -4,6 +4,7 @@ import java.util.*
 
 class Graph(N: Int) {
 
+
     data class Edge(val node: Int, val w: Long)
 
     private val edges: Array<MutableList<Edge>> = Array(N + 1) { i -> LinkedList<Edge>() }

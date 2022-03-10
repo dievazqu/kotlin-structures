@@ -18,7 +18,6 @@ import java.util.*
 //    }
 //    return g
 //}
-
 var s: Scanner = Scanner(System.`in`)
 fun getInt(): Int = s.nextInt()
 fun getLong(): Long = s.nextLong()
@@ -55,3 +54,19 @@ fun <T, C: Comparable<C>> Iterable<T>.findMax(map: (T) -> C): Pair<Int, T>? {
         return  Pair(maxIdx, maxValue!!)
     }
 }
+
+fun runCases(solve:()->Unit) {
+    var T = getInt()
+    for(i in 1..T) {
+        print("Case #$i: ")
+        solve()
+    }
+}
+
+//Types Aliases
+typealias MemFunction<I, O> = (I, Memory<I, O>) -> O
+typealias Memory<I, O> = (I) -> O
+
+//Const
+val MOD = (1e9.toLong()) + 7
+

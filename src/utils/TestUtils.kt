@@ -2,8 +2,6 @@ package utils
 
 class TestUtils{
 
-    data class Range<T>(val l:T, val r:T)
-
     companion object {
 
         fun getRandomNumber(min: Int, max: Int): Int {
@@ -17,15 +15,15 @@ class TestUtils{
             return (Math.random() * (max - min)).toLong() + min
         }
 
-        fun getRandomRange(min: Int, max: Int, maxRange: Int? = null): Range<Int> {
+        fun getRandomRange(min: Int, max: Int, maxRange: Int? = null): Pair<Int, Int> {
             val (I, J) = getRandomRange(min.toLong(), max.toLong(), maxRange?.toLong())
-            return Range(I.toInt(), J.toInt())
+            return Pair(I.toInt(), J.toInt())
         }
 
         /**
          * Return a range with different value in [$min, $max] and the range size is lower than $maxRange
          */
-        fun getRandomRange(min: Long, max: Long, maxRange: Long? = null): Range<Long> {
+        fun getRandomRange(min: Long, max: Long, maxRange: Long? = null): Pair<Long, Long> {
             if (maxRange != null && maxRange <= 2) {
                 throw IllegalArgumentException("maxRange must be greater than 2")
             }
@@ -40,7 +38,7 @@ class TestUtils{
             if (maxRange != null && maxRange < maxx - minn) {
                 maxx = minn + maxRange
             }
-            return Range(minn, maxx)
+            return Pair(minn, maxx)
         }
 
         fun getRandomArray(n:Int, max:Long): Array<Long>{
